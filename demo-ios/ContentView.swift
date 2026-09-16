@@ -1,38 +1,40 @@
 import SwiftUI
 
 struct ContentView: View {
+    @Environment(\\.colorScheme) var colorScheme
+
     var body: some View {
         ZStack {
-            Color.white
+            Color(uiColor: .systemBackground)
                 .ignoresSafeArea()
 
             VStack(alignment: .leading, spacing: 24) {
                 VStack(alignment: .leading, spacing: 6) {
                     Text("Overview")
                         .font(.largeTitle.bold())
-                        .foregroundStyle(.black)
+                        .foregroundStyle(.primary)
 
                     Text("September")
-                        .foregroundStyle(.gray)
+                        .foregroundStyle(.secondary)
                 }
 
                 VStack(alignment: .leading, spacing: 8) {
                     Text("Balance")
-                        .foregroundStyle(.gray)
+                        .foregroundStyle(.secondary)
 
                     Text("$12,840")
                         .font(.system(size: 36, weight: .bold))
-                        .foregroundStyle(.black)
+                        .foregroundStyle(.primary)
                 }
                 .padding(20)
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .background(Color(red: 0.94, green: 0.96, blue: 0.99))
+                .background(colorScheme == .dark ? Color(uiColor: .secondarySystemBackground) : Color(red: 0.94, green: 0.96, blue: 0.99))
                 .clipShape(RoundedRectangle(cornerRadius: 20))
 
                 VStack(alignment: .leading, spacing: 16) {
                     Text("Recent activity")
                         .font(.title3.bold())
-                        .foregroundStyle(.black)
+                        .foregroundStyle(.primary)
 
                     activityRow("Coffee", amount: "- $4.50")
                     activityRow("Subscription", amount: "- $12.00")
@@ -48,16 +50,22 @@ struct ContentView: View {
     private func activityRow(_ title: String, amount: String) -> some View {
         HStack {
             Text(title)
-                .foregroundStyle(.black)
+                .foregroundStyle(.primary)
 
             Spacer()
 
             Text(amount)
-                .foregroundStyle(.gray)
+                .foregroundStyle(.secondary)
         }
     }
 }
 
-#Preview {
+#Preview("Light Mode") {
     ContentView()
+        .preferredColorScheme(.light)
+}
+
+#Preview("Dark Mode") {
+    ContentView()
+        .preferredColorScheme(.dark)
 }
