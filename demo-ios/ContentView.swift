@@ -8,41 +8,52 @@ struct ContentView: View {
 
             VStack(alignment: .leading, spacing: 24) {
                 VStack(alignment: .leading, spacing: 6) {
-                    Text("Weekend Trip")
+                    Text("Overview")
                         .font(.largeTitle.bold())
                         .foregroundStyle(.black)
 
-                    Text("Explore somewhere new")
+                    Text("September")
                         .foregroundStyle(.gray)
                 }
 
-                Image(systemName: "mountain.2.fill")
-                    .font(.system(size: 70))
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, 40)
-                    .background(Color(red: 0.92, green: 0.95, blue: 0.98))
-                    .clipShape(RoundedRectangle(cornerRadius: 24))
-
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("Mountain Escape")
-                        .font(.title2.bold())
-                        .foregroundStyle(.black)
-
-                    Text("2 nights · September 20–22")
+                    Text("Balance")
                         .foregroundStyle(.gray)
 
-                    Text("A quiet weekend away from the city.")
+                    Text("$12,840")
+                        .font(.system(size: 36, weight: .bold))
                         .foregroundStyle(.black)
-                        .padding(.top, 4)
+                }
+                .padding(20)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .background(Color(red: 0.94, green: 0.96, blue: 0.99))
+                .clipShape(RoundedRectangle(cornerRadius: 20))
+
+                VStack(alignment: .leading, spacing: 16) {
+                    Text("Recent activity")
+                        .font(.title3.bold())
+                        .foregroundStyle(.black)
+
+                    activityRow("Coffee", amount: "- $4.50")
+                    activityRow("Subscription", amount: "- $12.00")
+                    activityRow("Transfer", amount: "+ $250.00")
                 }
 
                 Spacer()
-
-                Button("View trip") {}
-                    .buttonStyle(.borderedProminent)
-                    .frame(maxWidth: .infinity)
             }
             .padding(24)
+        }
+    }
+
+    private func activityRow(_ title: String, amount: String) -> some View {
+        HStack {
+            Text(title)
+                .foregroundStyle(.black)
+
+            Spacer()
+
+            Text(amount)
+                .foregroundStyle(.gray)
         }
     }
 }
